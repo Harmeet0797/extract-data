@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extract Time data</title>
+</head>
+
+<body>
+    <dl>
+        <dt>Latest Stories</dt>
+        <dd></dd>
+        <dt>Title:</dt>
+        <dd></dd>
+        <dt>Link:</dt>
+        <dd></dd>
+        <dt>Title:</dt>
+        <dd></dd>
+        <dt>Link:</dt>
+        <dd></dd>
+        <dt>Title:</dt>
+        <dd></dd>
+        <dt>Link:</dt>
+        <dd></dd>
+        <dt>Title:</dt>
+        <dd></dd>
+        <dt>Link:</dt>
+        <dd></dd>
+        <dt>Title:</dt>
+        <dd></dd>
+        <dt>Link:</dt>
+        <dd></dd>
+        <dt>Title:</dt>
+        <dd></dd>
+        <dt>Link:</dt>
+        <dd></dd>
+
+    </dl>
+
+
+    <script>
+        var dd = document.querySelectorAll("dd");
+
+        var xhr = new XMLHttpRequest;
+
+        xhr.open("GET", "https://cors-anywhere.herokuapp.com/https://time.com/", true);
+        xhr.responseType = "document";
+
+        xhr.onload = function() {
+
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = xhr.responseXML.querySelectorAll(".latest-stories__item");
+
+                dd[1].innerText = response[0].children[0].textContent;
+                dd[2].innerText = response[0].children[0].getAttribute("href");
+                dd[3].innerText = response[1].children[0].textContent;
+                dd[4].innerText = response[1].children[0].getAttribute("href");
+                dd[5].innerText = response[2].children[0].textContent;
+                dd[6].innerText = response[2].children[0].getAttribute("href");
+                dd[7].innerText = response[3].children[0].textContent;
+                dd[8].innerText = response[3].children[0].getAttribute("href");
+                dd[9].innerText = response[4].children[0].textContent;
+                dd[10].innerText = response[4].children[0].getAttribute("href");
+                dd[11].innerText = response[5].children[0].textContent;
+                dd[12].innerText = response[5].children[0].getAttribute("href");
+
+                const saveData = JSON.stringify(dd);
+                console.log(dd);
+                console.log(saveData);
+            }
+        };
+
+        xhr.onerror = function() {
+            console.error(xhr.status, xhr.statusText);
+        }
+        xhr.send();
+    </script>
+</body>
+
+</html>
